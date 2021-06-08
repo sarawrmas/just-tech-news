@@ -16,3 +16,9 @@ PUT http://localhost:3001/api/posts/1
 {
     "title": "Runbuddy reaches 2 million subscribers"
 }
+
+PUT http://localhost:3001/api/posts/upvote
+{
+    "user_id": 1,
+    "post_id": 1
+}

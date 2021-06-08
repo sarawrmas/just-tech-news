@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Post, Vote } = require('../../models');
 
 // GET /api/users
 router.get('/', (req, res) => {
     // select all users from user table using findAll method (similar to SELECT * FROM users)
     User.findAll({
         // do not return password data
-        // attributes: { exclude: ['password'] }
+        attributes: { exclude: ['password'] }
     })
     // send data as JSON
     .then(dbUserData => res.json(dbUserData))
@@ -20,10 +20,22 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     // select one user from user table using findOne method (similar to SELECT * FROM users WHERE id = ?)
     User.findOne({
-        // attributes: { exclude: ['password'] },
+        attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
-        }
+        },
+        include: [
+            {   // see what posts User has made
+                model: Post,
+                attributes: ['id', 'title', 'post_url', 'created_at']
+            },
+            {   // see what posts User has voted on
+                model: Post,
+                attributes: ['title'],
+                through: Vote,
+                as: 'voted_posts'
+            }
+        ]
     })
     .then(dbUserData => {
         if (!dbUserData) {
