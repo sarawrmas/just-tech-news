@@ -29,6 +29,14 @@ router.get('/:id', (req, res) => {
                 model: Post,
                 attributes: ['id', 'title', 'post_url', 'created_at']
             },
+            {   // use the Comment model to JOIN title to User query
+                model: Comment,
+                attributes: ['id', 'comment_text', 'created_at'],
+                include: {
+                    model: Post,
+                    attributes: ['title']
+                }
+            },
             {   // see what posts User has voted on
                 model: Post,
                 attributes: ['title'],
