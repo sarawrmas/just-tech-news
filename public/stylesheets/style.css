@@ -149,6 +149,7 @@ main {
 .comment {
     padding: 1%;
     margin-bottom: 1%;
+    overflow-wrap: break-word;
 }
 
 .comment:nth-child(odd) {

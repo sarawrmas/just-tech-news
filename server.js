@@ -4,9 +4,11 @@ const express = require('express');
 const routes = require('./controllers/');
 // import the connection to Sequelize from config folder
 const sequelize = require('./config/connection.js');
+// import helper functions
+const helpers = require('./utils/helpers');
 // Set up Handlebars.js as the app's template engine of choice
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
 // use express-session to connect to the back-end
 const session = require('express-session');
 // use connect-session-sequelize library to automatically store sessions created by express-session into the database
