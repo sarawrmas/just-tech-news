@@ -57,6 +57,16 @@ textarea {
     min-height: 100px;
 }
 
+.form-div {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.login-btn {
+    padding: 10px;
+}
+
 form > div {
     margin-bottom: 2%;
 }
